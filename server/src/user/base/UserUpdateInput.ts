@@ -16,6 +16,7 @@ import { EventoUpdateManyWithoutUsersInput } from "./EventoUpdateManyWithoutUser
 import { Type } from "class-transformer";
 import { ListingUpdateManyWithoutUsersInput } from "./ListingUpdateManyWithoutUsersInput";
 import { LugarUpdateManyWithoutUsersInput } from "./LugarUpdateManyWithoutUsersInput";
+import { ProductoUpdateManyWithoutUsersInput } from "./ProductoUpdateManyWithoutUsersInput";
 import { IsJSONValue } from "../../validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
@@ -103,6 +104,18 @@ class UserUpdateInput {
     nullable: true,
   })
   password?: string;
+
+  @ApiProperty({
+    required: false,
+    type: () => ProductoUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => ProductoUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => ProductoUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  productos?: ProductoUpdateManyWithoutUsersInput;
 
   @ApiProperty({
     required: false,

@@ -15,6 +15,7 @@ import {
 import { EventoTitle } from "../evento/EventoTitle";
 import { UserTitle } from "../user/UserTitle";
 import { LugarTitle } from "../lugar/LugarTitle";
+import { ProductoTitle } from "../producto/ProductoTitle";
 import { TripTitle } from "../trip/TripTitle";
 import { WishlistTitle } from "../wishlist/WishlistTitle";
 
@@ -54,6 +55,14 @@ export const ListingEdit = (props: EditProps): React.ReactElement => {
         <div />
         <TextInput label="placeType" source="placeType" />
         <NumberInput label="price" source="price" />
+        <ReferenceArrayInput
+          source="productos"
+          reference="Producto"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={ProductoTitle} />
+        </ReferenceArrayInput>
         <TextInput label="title" source="title" />
         <ReferenceArrayInput
           source="trips"

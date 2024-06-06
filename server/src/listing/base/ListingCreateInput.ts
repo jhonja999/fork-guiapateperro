@@ -24,6 +24,7 @@ import { IsJSONValue } from "../../validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
 import { LugarCreateNestedManyWithoutListingsInput } from "./LugarCreateNestedManyWithoutListingsInput";
+import { ProductoCreateNestedManyWithoutListingsInput } from "./ProductoCreateNestedManyWithoutListingsInput";
 import { TripCreateNestedManyWithoutListingsInput } from "./TripCreateNestedManyWithoutListingsInput";
 import { WishlistCreateNestedManyWithoutListingsInput } from "./WishlistCreateNestedManyWithoutListingsInput";
 
@@ -128,6 +129,18 @@ class ListingCreateInput {
   @IsNumber()
   @Field(() => Number)
   price!: number;
+
+  @ApiProperty({
+    required: false,
+    type: () => ProductoCreateNestedManyWithoutListingsInput,
+  })
+  @ValidateNested()
+  @Type(() => ProductoCreateNestedManyWithoutListingsInput)
+  @IsOptional()
+  @Field(() => ProductoCreateNestedManyWithoutListingsInput, {
+    nullable: true,
+  })
+  productos?: ProductoCreateNestedManyWithoutListingsInput;
 
   @ApiProperty({
     required: true,

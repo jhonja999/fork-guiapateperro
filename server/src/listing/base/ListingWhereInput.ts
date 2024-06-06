@@ -20,6 +20,7 @@ import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 import { JsonFilter } from "../../util/JsonFilter";
 import { LugarListRelationFilter } from "../../lugar/base/LugarListRelationFilter";
 import { FloatFilter } from "../../util/FloatFilter";
+import { ProductoListRelationFilter } from "../../producto/base/ProductoListRelationFilter";
 import { TripListRelationFilter } from "../../trip/base/TripListRelationFilter";
 import { WishlistListRelationFilter } from "../../wishlist/base/WishlistListRelationFilter";
 
@@ -181,6 +182,18 @@ class ListingWhereInput {
     nullable: true,
   })
   price?: FloatFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => ProductoListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => ProductoListRelationFilter)
+  @IsOptional()
+  @Field(() => ProductoListRelationFilter, {
+    nullable: true,
+  })
+  productos?: ProductoListRelationFilter;
 
   @ApiProperty({
     required: false,

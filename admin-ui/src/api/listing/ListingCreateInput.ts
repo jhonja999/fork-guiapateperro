@@ -2,6 +2,7 @@ import { EventoCreateNestedManyWithoutListingsInput } from "./EventoCreateNested
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 import { InputJsonValue } from "../../types";
 import { LugarCreateNestedManyWithoutListingsInput } from "./LugarCreateNestedManyWithoutListingsInput";
+import { ProductoCreateNestedManyWithoutListingsInput } from "./ProductoCreateNestedManyWithoutListingsInput";
 import { TripCreateNestedManyWithoutListingsInput } from "./TripCreateNestedManyWithoutListingsInput";
 import { WishlistCreateNestedManyWithoutListingsInput } from "./WishlistCreateNestedManyWithoutListingsInput";
 
@@ -18,6 +19,7 @@ export type ListingCreateInput = {
   placeSpace: InputJsonValue;
   placeType: string;
   price: number;
+  productos?: ProductoCreateNestedManyWithoutListingsInput;
   title: string;
   trips?: TripCreateNestedManyWithoutListingsInput;
   wishlists?: WishlistCreateNestedManyWithoutListingsInput;

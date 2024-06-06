@@ -18,6 +18,7 @@ import { EventoListRelationFilter } from "../../evento/base/EventoListRelationFi
 import { StringFilter } from "../../util/StringFilter";
 import { ListingListRelationFilter } from "../../listing/base/ListingListRelationFilter";
 import { LugarListRelationFilter } from "../../lugar/base/LugarListRelationFilter";
+import { ProductoListRelationFilter } from "../../producto/base/ProductoListRelationFilter";
 import { TripListRelationFilter } from "../../trip/base/TripListRelationFilter";
 import { WishlistListRelationFilter } from "../../wishlist/base/WishlistListRelationFilter";
 
@@ -102,6 +103,18 @@ class UserWhereInput {
     nullable: true,
   })
   lugars?: LugarListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => ProductoListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => ProductoListRelationFilter)
+  @IsOptional()
+  @Field(() => ProductoListRelationFilter, {
+    nullable: true,
+  })
+  productos?: ProductoListRelationFilter;
 
   @ApiProperty({
     required: false,

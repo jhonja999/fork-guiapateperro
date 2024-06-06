@@ -30,6 +30,8 @@ import { EventoFindManyArgs } from "../../evento/base/EventoFindManyArgs";
 import { Evento } from "../../evento/base/Evento";
 import { LugarFindManyArgs } from "../../lugar/base/LugarFindManyArgs";
 import { Lugar } from "../../lugar/base/Lugar";
+import { ProductoFindManyArgs } from "../../producto/base/ProductoFindManyArgs";
+import { Producto } from "../../producto/base/Producto";
 import { TripFindManyArgs } from "../../trip/base/TripFindManyArgs";
 import { Trip } from "../../trip/base/Trip";
 import { WishlistFindManyArgs } from "../../wishlist/base/WishlistFindManyArgs";
@@ -195,6 +197,26 @@ export class ListingResolverBase {
     @graphql.Args() args: LugarFindManyArgs
   ): Promise<Lugar[]> {
     const results = await this.service.findLugars(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [Producto], { name: "productos" })
+  @nestAccessControl.UseRoles({
+    resource: "Producto",
+    action: "read",
+    possession: "any",
+  })
+  async findProductos(
+    @graphql.Parent() parent: Listing,
+    @graphql.Args() args: ProductoFindManyArgs
+  ): Promise<Producto[]> {
+    const results = await this.service.findProductos(parent.id, args);
 
     if (!results) {
       return [];

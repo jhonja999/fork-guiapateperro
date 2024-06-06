@@ -32,6 +32,9 @@ import { EventoWhereUniqueInput } from "../../evento/base/EventoWhereUniqueInput
 import { LugarFindManyArgs } from "../../lugar/base/LugarFindManyArgs";
 import { Lugar } from "../../lugar/base/Lugar";
 import { LugarWhereUniqueInput } from "../../lugar/base/LugarWhereUniqueInput";
+import { ProductoFindManyArgs } from "../../producto/base/ProductoFindManyArgs";
+import { Producto } from "../../producto/base/Producto";
+import { ProductoWhereUniqueInput } from "../../producto/base/ProductoWhereUniqueInput";
 import { TripFindManyArgs } from "../../trip/base/TripFindManyArgs";
 import { Trip } from "../../trip/base/Trip";
 import { TripWhereUniqueInput } from "../../trip/base/TripWhereUniqueInput";
@@ -499,6 +502,116 @@ export class ListingControllerBase {
   ): Promise<void> {
     const data = {
       lugars: {
+        disconnect: body,
+      },
+    };
+    await this.service.updateListing({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/productos")
+  @ApiNestedQuery(ProductoFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "Producto",
+    action: "read",
+    possession: "any",
+  })
+  async findProductos(
+    @common.Req() request: Request,
+    @common.Param() params: ListingWhereUniqueInput
+  ): Promise<Producto[]> {
+    const query = plainToClass(ProductoFindManyArgs, request.query);
+    const results = await this.service.findProductos(params.id, {
+      ...query,
+      select: {
+        createdAt: true,
+        id: true,
+
+        listing: {
+          select: {
+            id: true,
+          },
+        },
+
+        price: true,
+        productinfo: true,
+        updatedAt: true,
+
+        user: {
+          select: {
+            id: true,
+          },
+        },
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/productos")
+  @nestAccessControl.UseRoles({
+    resource: "Listing",
+    action: "update",
+    possession: "any",
+  })
+  async connectProductos(
+    @common.Param() params: ListingWhereUniqueInput,
+    @common.Body() body: ProductoWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      productos: {
+        connect: body,
+      },
+    };
+    await this.service.updateListing({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/productos")
+  @nestAccessControl.UseRoles({
+    resource: "Listing",
+    action: "update",
+    possession: "any",
+  })
+  async updateProductos(
+    @common.Param() params: ListingWhereUniqueInput,
+    @common.Body() body: ProductoWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      productos: {
+        set: body,
+      },
+    };
+    await this.service.updateListing({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/productos")
+  @nestAccessControl.UseRoles({
+    resource: "Listing",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectProductos(
+    @common.Param() params: ListingWhereUniqueInput,
+    @common.Body() body: ProductoWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      productos: {
         disconnect: body,
       },
     };

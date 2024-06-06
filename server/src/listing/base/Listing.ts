@@ -25,6 +25,7 @@ import { IsJSONValue } from "../../validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { JsonValue } from "type-fest";
 import { Lugar } from "../../lugar/base/Lugar";
+import { Producto } from "../../producto/base/Producto";
 import { Trip } from "../../trip/base/Trip";
 import { Wishlist } from "../../wishlist/base/Wishlist";
 
@@ -138,6 +139,15 @@ class Listing {
   @IsNumber()
   @Field(() => Number)
   price!: number;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Producto],
+  })
+  @ValidateNested()
+  @Type(() => Producto)
+  @IsOptional()
+  productos?: Array<Producto>;
 
   @ApiProperty({
     required: true,

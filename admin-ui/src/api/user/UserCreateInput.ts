@@ -1,6 +1,7 @@
 import { EventoCreateNestedManyWithoutUsersInput } from "./EventoCreateNestedManyWithoutUsersInput";
 import { ListingCreateNestedManyWithoutUsersInput } from "./ListingCreateNestedManyWithoutUsersInput";
 import { LugarCreateNestedManyWithoutUsersInput } from "./LugarCreateNestedManyWithoutUsersInput";
+import { ProductoCreateNestedManyWithoutUsersInput } from "./ProductoCreateNestedManyWithoutUsersInput";
 import { InputJsonValue } from "../../types";
 import { TripCreateNestedManyWithoutUsersInput } from "./TripCreateNestedManyWithoutUsersInput";
 import { WishlistCreateNestedManyWithoutUsersInput } from "./WishlistCreateNestedManyWithoutUsersInput";
@@ -13,6 +14,7 @@ export type UserCreateInput = {
   listings?: ListingCreateNestedManyWithoutUsersInput;
   lugars?: LugarCreateNestedManyWithoutUsersInput;
   password: string;
+  productos?: ProductoCreateNestedManyWithoutUsersInput;
   roles: InputJsonValue;
   trips?: TripCreateNestedManyWithoutUsersInput;
   username: string;

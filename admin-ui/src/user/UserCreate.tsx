@@ -13,6 +13,7 @@ import {
 import { EventoTitle } from "../evento/EventoTitle";
 import { ListingTitle } from "../listing/ListingTitle";
 import { LugarTitle } from "../lugar/LugarTitle";
+import { ProductoTitle } from "../producto/ProductoTitle";
 import { TripTitle } from "../trip/TripTitle";
 import { WishlistTitle } from "../wishlist/WishlistTitle";
 import { ROLES_OPTIONS } from "../user/RolesOptions";
@@ -49,6 +50,14 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={LugarTitle} />
         </ReferenceArrayInput>
         <PasswordInput label="Password" source="password" />
+        <ReferenceArrayInput
+          source="productos"
+          reference="Producto"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={ProductoTitle} />
+        </ReferenceArrayInput>
         <SelectArrayInput
           source="roles"
           choices={ROLES_OPTIONS}

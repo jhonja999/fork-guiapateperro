@@ -16,6 +16,7 @@ import {
   Listing as PrismaListing,
   Evento as PrismaEvento,
   Lugar as PrismaLugar,
+  Producto as PrismaProducto,
   Trip as PrismaTrip,
   Wishlist as PrismaWishlist,
   User as PrismaUser,
@@ -74,6 +75,17 @@ export class ListingServiceBase {
         where: { id: parentId },
       })
       .lugars(args);
+  }
+
+  async findProductos(
+    parentId: string,
+    args: Prisma.ProductoFindManyArgs
+  ): Promise<PrismaProducto[]> {
+    return this.prisma.listing
+      .findUniqueOrThrow({
+        where: { id: parentId },
+      })
+      .productos(args);
   }
 
   async findTrips(

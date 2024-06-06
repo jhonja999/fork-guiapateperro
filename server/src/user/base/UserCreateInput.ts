@@ -16,6 +16,7 @@ import { EventoCreateNestedManyWithoutUsersInput } from "./EventoCreateNestedMan
 import { Type } from "class-transformer";
 import { ListingCreateNestedManyWithoutUsersInput } from "./ListingCreateNestedManyWithoutUsersInput";
 import { LugarCreateNestedManyWithoutUsersInput } from "./LugarCreateNestedManyWithoutUsersInput";
+import { ProductoCreateNestedManyWithoutUsersInput } from "./ProductoCreateNestedManyWithoutUsersInput";
 import { IsJSONValue } from "../../validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
@@ -100,6 +101,18 @@ class UserCreateInput {
   @IsString()
   @Field(() => String)
   password!: string;
+
+  @ApiProperty({
+    required: false,
+    type: () => ProductoCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => ProductoCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => ProductoCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  productos?: ProductoCreateNestedManyWithoutUsersInput;
 
   @ApiProperty({
     required: true,

@@ -16,6 +16,7 @@ import { Type } from "class-transformer";
 import { Evento } from "../../evento/base/Evento";
 import { Listing } from "../../listing/base/Listing";
 import { Lugar } from "../../lugar/base/Lugar";
+import { Producto } from "../../producto/base/Producto";
 import { IsJSONValue } from "../../validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { JsonValue } from "type-fest";
@@ -99,6 +100,15 @@ class User {
   @Type(() => Lugar)
   @IsOptional()
   lugars?: Array<Lugar>;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Producto],
+  })
+  @ValidateNested()
+  @Type(() => Producto)
+  @IsOptional()
+  productos?: Array<Producto>;
 
   @ApiProperty({
     required: true,

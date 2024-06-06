@@ -29,6 +29,10 @@ import { LugarList } from "./lugar/LugarList";
 import { LugarCreate } from "./lugar/LugarCreate";
 import { LugarEdit } from "./lugar/LugarEdit";
 import { LugarShow } from "./lugar/LugarShow";
+import { ProductoList } from "./producto/ProductoList";
+import { ProductoCreate } from "./producto/ProductoCreate";
+import { ProductoEdit } from "./producto/ProductoEdit";
+import { ProductoShow } from "./producto/ProductoShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -96,6 +100,13 @@ const App = (): React.ReactElement => {
           edit={LugarEdit}
           create={LugarCreate}
           show={LugarShow}
+        />
+        <Resource
+          name="Producto"
+          list={ProductoList}
+          edit={ProductoEdit}
+          create={ProductoCreate}
+          show={ProductoShow}
         />
       </Admin>
     </div>

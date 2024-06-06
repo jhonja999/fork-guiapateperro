@@ -24,6 +24,7 @@ import { IsJSONValue } from "../../validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
 import { LugarUpdateManyWithoutListingsInput } from "./LugarUpdateManyWithoutListingsInput";
+import { ProductoUpdateManyWithoutListingsInput } from "./ProductoUpdateManyWithoutListingsInput";
 import { TripUpdateManyWithoutListingsInput } from "./TripUpdateManyWithoutListingsInput";
 import { WishlistUpdateManyWithoutListingsInput } from "./WishlistUpdateManyWithoutListingsInput";
 
@@ -158,6 +159,18 @@ class ListingUpdateInput {
     nullable: true,
   })
   price?: number;
+
+  @ApiProperty({
+    required: false,
+    type: () => ProductoUpdateManyWithoutListingsInput,
+  })
+  @ValidateNested()
+  @Type(() => ProductoUpdateManyWithoutListingsInput)
+  @IsOptional()
+  @Field(() => ProductoUpdateManyWithoutListingsInput, {
+    nullable: true,
+  })
+  productos?: ProductoUpdateManyWithoutListingsInput;
 
   @ApiProperty({
     required: false,

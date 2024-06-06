@@ -5,6 +5,7 @@ import { WishlistModule } from "./wishlist/wishlist.module";
 import { TripModule } from "./trip/trip.module";
 import { EventoModule } from "./evento/evento.module";
 import { LugarModule } from "./lugar/lugar.module";
+import { ProductoModule } from "./producto/producto.module";
 import { HealthModule } from "./health/health.module";
 import { PrismaModule } from "./prisma/prisma.module";
 import { SecretsManagerModule } from "./providers/secrets/secretsManager.module";
@@ -28,6 +29,7 @@ import { AuthModule } from "./auth/auth.module";
     TripModule,
     EventoModule,
     LugarModule,
+    ProductoModule,
     HealthModule,
     PrismaModule,
     SecretsManagerModule,
